@@ -1,8 +1,9 @@
+const RESTAURANTS_API_URL = 'https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants';
 const restaurantList = document.querySelector('#restaurant-list');
 
 async function loadRestaurants() {
     try {
-        const response = await fetch('/api/v1/restaurants');
+        const response = await fetch(RESTAURANTS_API_URL);
 
         if(!response.ok) {
             throw new Error(`Request failed ${response.status}`);
