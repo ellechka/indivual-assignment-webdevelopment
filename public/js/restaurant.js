@@ -20,14 +20,20 @@ async function loadRestaurants() {
            
            const dailyMenuLink = document.createElement('a');
            dailyMenuLink.textContent = 'View daily menu';
+
+           const weeklyMenuLink = document.createElement('a');
+           weeklyMenuLink.textContent = 'View weekly menu';
            
            const params = new URLSearchParams({
               restaurantId: restaurant._id,
               lang: 'en', 
            });
+
            dailyMenuLink.href = `daily-menu.html?${params}`;
+           weeklyMenuLink.href = `weekly-menu.html?${params}`;
            
            item.append(dailyMenuLink);
+           item.append(weeklyMenuLink);
            list.append(item);
         });
 
