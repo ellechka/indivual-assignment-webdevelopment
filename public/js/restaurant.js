@@ -10,11 +10,24 @@ async function loadRestaurants() {
         }
 
         const restaurants = await response.json();
+        console.log(restaurants);
+        
         const list = document.createElement('ul');
 
         restaurants.forEach((restaurant) => {
            const item = document.createElement('li');
-           item.textContent = restaurant.name;
+           item.textContent = restaurant.name + ' ';
+           
+           const dailyMenuLink = document.createElement('a');
+           dailyMenuLink.textContent = 'View daily menu';
+           
+           const params = new URLSearchParams({
+              restaurantId: restaurant._id,
+              lang: 'en', 
+           });
+           dailyMenuLink.href = `daily-menu.html?${params}`;
+           
+           item.append(dailyMenuLink);
            list.append(item);
         });
 
