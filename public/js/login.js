@@ -1,8 +1,8 @@
-const USER_AUTH_API_URL = 'https://media2.edu.metropolia.fi/restaurant//api/v1/auth/login';
+const USER_AUTH_API_URL = 'https://media2.edu.metropolia.fi/restaurant/api/v1/auth/login';
 const loginForm = document.querySelector('#login-form');
 const loginMessage = document.querySelector('#login-message');
 
-async function UserLogin(username, password) {
+async function loginUser(username, password) {
     const response = await fetch(USER_AUTH_API_URL, {
         method: 'POST',
         headers: {
@@ -24,11 +24,11 @@ loginForm.addEventListener('submit', async (event) => {
     const formData = new FormData(loginForm);
 
     try {
-        const result = await UserLogin(
+        await loginUser(
             formData.get('username'),
             formData.get('password')
         );
-        console.log(result);
+
         loginMessage.textContent = 'You logged in successfully';
     } catch (error) {
         console.log('Could not log in: ', error);
