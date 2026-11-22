@@ -14,6 +14,8 @@
 
     <main>
         <h1>Create an account</h1>
+
+        <!-- Creates a register form with fields 'username', 'email' and 'password' that allows user to create an account -->
         <form id="register-form">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" autocomplete="username" required>
@@ -25,13 +27,18 @@
             <label for="password">Password</label>
             <input id="password" name="password" type="password" autocomplete="new-password" required>
 
+            <!-- Submits form for further processing. -->
             <button type="submit">Register</button>
+
+            <!-- Shows the user whether they have registered an account or not. -->
             <p id="register-message"></p>
         </form>
 
+        <!-- Links to the login page . -->
         <p>Already have an account? <a href="login.html">Login</a></p>
     </main>
 
-<script type='module' src="../js/register.js" defer></script>
+    <!-- Exports script from "register.js" -->
+    <script type='module' src="../js/register.js" defer></script>
 </body>
 </html>

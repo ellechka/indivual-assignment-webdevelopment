@@ -8,6 +8,7 @@
 </head>
 <body>
     <header>
+        <!-- Creates links to other pages -->
         <a href="index.html">Restaurants</a>
         <a href="login.html">Login</a>
         <a href="register.html">Register</a>
@@ -17,17 +18,19 @@
     <main>
         <h1>Restaurants</h1>
 
+        <!-- Allows users to choose how restaurants are sorted. -->
         <label for="sort">Sort by: </label>
         <select id="sort">
             <option value="name">Alphabetical</option>
             <option value="distance">Distance</option>
         </select>
 
+        <!-- Shows all restaurants using API. -->
         <section id="restaurant-list">
 
         </section>
     </main>
-
-<script src="../js/restaurant.js" defer></script>
+    <!-- Exports script from "restaurant.js" -->
+    <script src="../js/restaurant.js" defer></script>
 </body>
 </html>
