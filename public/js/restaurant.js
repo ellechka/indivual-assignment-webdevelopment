@@ -60,28 +60,32 @@ function displayRestaurants(restaurants) {
         const name = document.createElement('span');
         name.textContent = restaurant.name;
         
-        // Checks whether this restaurant is in the favorites list
-        const isFavorite = favoriteIds.includes(restaurant._id);
-
-        // Creates a button for marking the restaurant as a favorite
-        const favoriteButton = document.createElement('button');
-        favoriteButton.type = 'button';
-        favoriteButton.className = 'favorite-button';
-        favoriteButton.textContent = '♡';
-        favoriteButton.classList.toggle('favorite-button-active', isFavorite);
-        favoriteButton.setAttribute('aria-label', isFavorite
-            ? 'Remove from favorites'
-            : 'Add to favorites');
-        favoriteButton.setAttribute('aria-pressed', isFavorite);
-        favoriteButton.addEventListener('click', () => {
-            toggleFavorite(restaurant._id);
-            displayRestaurants(restaurants);
-        });
-
         heading.append(name, locationButton);
 
         const restaurantActions = document.createElement('div');
         restaurantActions.className = 'restaurant-actions';
+
+        if (localStorage.getItem('loggedIn') === 'true') {
+            // Checks whether this restaurant is in the favorites list
+            const isFavorite = favoriteIds.includes(restaurant._id);
+
+            // Creates a button for marking the restaurant as a favorite
+            const favoriteButton = document.createElement('button');
+            favoriteButton.type = 'button';
+            favoriteButton.className = 'favorite-button';
+            favoriteButton.textContent = '♡';
+            favoriteButton.classList.toggle('favorite-button-active', isFavorite);
+            favoriteButton.setAttribute('aria-label', isFavorite
+                ? 'Remove from favorites'
+                : 'Add to favorites');
+            favoriteButton.setAttribute('aria-pressed', isFavorite);
+            favoriteButton.addEventListener('click', () => {
+                toggleFavorite(restaurant._id);
+                displayRestaurants(restaurants);
+            });
+
+            restaurantActions.append(favoriteButton);
+        }
         
         // Creates a link to the restaurant's daily menu.
         const dailyMenuLink = document.createElement('a');
@@ -101,7 +105,7 @@ function displayRestaurants(restaurants) {
         dailyMenuLink.href = `daily-menu.html?${params}`;
         weeklyMenuLink.href = `weekly-menu.html?${params}`;
 
-        restaurantActions.append(favoriteButton, dailyMenuLink, weeklyMenuLink);
+        restaurantActions.append(dailyMenuLink, weeklyMenuLink);
         item.append(heading, restaurantActions);
         list.append(item);
     });
@@ -148,6 +152,9 @@ async function loadRestaurants() {
 
         allRestaurants = restaurants;
         displayRestaurants(allRestaurants);
+        window.addEventListener('auth-state-changed', () => {
+            displayRestaurants(allRestaurants);
+        });
     } catch (error) {
         // Log the error and show a message if the menu could not be loaded.
         console.error('Could not load restaurants: ', error);
