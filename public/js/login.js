@@ -38,6 +38,10 @@ loginForm.addEventListener('submit', async (event) => {
             formData.get('password')
         );
 
+        //if the user is logged in, displays the link
+        localStorage.getItem('loggedIn', 'true');
+        document.querySelector("#profile-link").hidden = false;
+
         // Shows a success message
         loginMessage.textContent = 'You logged in successfully';
 
