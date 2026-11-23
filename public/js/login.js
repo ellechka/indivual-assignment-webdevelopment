@@ -44,6 +44,8 @@ loginForm.addEventListener('submit', async (event) => {
         //if the user is logged in, displays the link
         localStorage.setItem('loggedIn', 'true');
         document.querySelector("#profile-link").hidden = false;
+        // Updates the header after the login state changes.
+        window.dispatchEvent(new Event('auth-state-changed'));
 
         // Shows a success message
         loginMessage.textContent = 'You logged in successfully';
