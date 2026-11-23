@@ -94,6 +94,19 @@ select {
     background-color: #3978a6;
 }
 
+/* Styles for favorite restaurants */
+
+#restaurant-list .favorite-button {
+    padding: 0;
+    background: none;
+    color: #777;
+    font-size: 1.8rem;
+}
+
+#restaurant-list .favorite-button-active {
+    color: #d33;
+}
+
 /* Styles for login and register pages (form and button) */
 form {
     display: flex;
