@@ -1,6 +1,8 @@
 // Gets the header elements
 const profileLink = document.querySelector('#profile-link');
 const header = document.querySelector('header');
+const loginLink = header.querySelector('a[href="login.html"]');
+const registerLink = header.querySelector('a[href="register.html"]');
 const logoutButton = document.createElement('button');
 
 // Creates the logout button and hides it until the user logs in
@@ -14,6 +16,8 @@ function updateHeader() {
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     profileLink.hidden = !isLoggedIn;
     logoutButton.hidden = !isLoggedIn;
+    loginLink.hidden = isLoggedIn;
+    registerLink.hidden = isLoggedIn;
 }
 
 // Logs out the user and redirects to the home page
