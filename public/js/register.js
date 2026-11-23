@@ -84,13 +84,13 @@ registerForm.addEventListener('submit', async (event) => {
     // Gets the username separately from other data for further handling
     const username = formData.get('username').trim();
 
-    // Stops registration if the username is already taken.
-    if (!(await isUsernameAvailable(username))) {
-        registerMessage.textContent = 'Username is already taken';
-        return;
-    }
-
     try {
+        // Stops registration if the username is already taken.
+        if (!(await isUsernameAvailable(username))) {
+            registerMessage.textContent = 'Username is already taken';
+            return;
+        }
+
         // Calls the function registerUser() and sends register username, email and password
         await registerUser(
             username,
@@ -114,4 +114,3 @@ registerForm.addEventListener('submit', async (event) => {
         }
     }
 });
-
