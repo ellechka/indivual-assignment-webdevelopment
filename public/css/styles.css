@@ -103,8 +103,28 @@ form {
 }
 
 #login-form,
-#register-form {
+#register-form,
+#profile-form,
+#avatar-form {
     margin: 0 auto;
+}
+/* Styles for profile's avatar form */
+
+#avatar-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+#avatar-preview {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#avatar-form {
+    text-align: left;
 }
 
 main:has(#login-form) > p,
@@ -117,6 +137,11 @@ input {
     border: 1px solid #ccc;
     border-radius: 6px;
     font: inherit;
+}
+
+.optional {
+    color: #888;
+    font-size: 0.9em;
 }
 
 #login-form input,
