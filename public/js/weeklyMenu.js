@@ -1,6 +1,85 @@
 const WEEKLY_MENU_API_URL = "https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants/weekly";
 const weeklyMenuByRestaurant = document.querySelector('#weekly-menu');
 
+// Displays the weekly menu in a user-friendly way
+function displayWeeklyMenu(menu) {
+    const days = menu.days;
+    const container = document.querySelector("#weekly-menu");
+
+    // Shows the message and exists the function
+    if (!days.length) {
+        container.textContent = 'No weekly menu available';
+        return;
+    }
+
+    // Creates the main container for the weekly menu
+    const layout = document.createElement('div');
+    layout.className = 'weekly-layout';
+
+    const dayList = document.createElement('nav');
+    dayList.className = 'weekly-days';
+
+    const dayMenu = document.createElement('section');
+
+    // Displays the menu for the selected day
+    function showDay(index) {
+        const day = days[index];
+
+        // Highlights the selected day button
+        dayList.querySelectorAll('button').forEach((button, buttonIndex) => {
+            button.classList.toggle('active', buttonIndex === index);
+        });
+
+        const title = document.createElement('h2');
+        title.textContent = day.date;
+
+        // Creates the weekly menu's headers of the table
+        const table = document.createElement('table');
+        table.className = 'menu-table';
+        table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Dish</th>
+                <th>Price</th>
+                <th>Diets</th>
+            </tr>
+        </thead>
+        `;
+
+        const body = document.createElement('tbody');
+
+        // Creates a table row for each day and populates it with data,
+        // even if the returned array is empty
+        (day.courses || []).forEach((course) => {
+           const row = document.createElement('tr');
+           row.innerHTML = `
+                <td>${course.name}</td>
+                <td>${course.price}</td>
+                <td>${course.diets}</td>
+           `;
+           body.append(row);
+        });
+
+        // Adds rows to the table
+        table.append(body);
+        dayMenu.replaceChildren(title, table);
+    }
+
+    // Creates clickable buttons for each day
+    days.forEach((day, index) => {
+       const button = document.createElement('button');
+       button.type = 'button';
+       button.textContent = day.date;
+       button.addEventListener('click', () => showDay(index));
+       dayList.append(button);
+    });
+
+    // Adds the day navigation and menu to the main layout
+    layout.append(dayList, dayMenu);
+    container.replaceChildren(layout);
+    showDay(0);
+}
+
 // Fetches and displays the weekly menu for the selected restaurant
 async function loadWeeklyMenu(restaurantId, lang) {
     try {
@@ -12,14 +91,18 @@ async function loadWeeklyMenu(restaurantId, lang) {
 
         // If API request has been failed, stops this function and throws Error
         if (!response.ok) {
-            throw new Error(`Request to fetch weekly menu failed: ${response.status}`);
+            //throw new Error(`Request to fetch weekly menu failed: ${response.status}`);
+            const errorBody = await response.json();
+            console.error(response.status, errorBody);
+            throw new Error(`ERROR: ${response.status}`);
+
         }
 
         // Parses the API response as JSON
         const weeklyMenu = await response.json();
 
-        // Displays the weekly menu as formatted JSON
-        weeklyMenuByRestaurant.textContent = JSON.stringify(weeklyMenu, null, 2);
+        // Calls the function which displays weekly menu
+        displayWeeklyMenu(weeklyMenu);
 
     } catch (error) {
 
