@@ -15,6 +15,48 @@
         <a href="profile.html" id="profile-link" hidden>Profile</a>
     </header>
 
+    <main>
+        <!-- Creates an account's avatar form that allows user to upload own avatar
+         and view it -->
+        <section id="avatar-section">
+            <img id="avatar-preview" alt="Profile photo" hidden>
+            <form id="avatar-form">
+                <label for="avatar">Profile photo</label>
+                <input id="avatar" name="avatar" type="file" accept="image/*" required>
+
+                <!-- Submits form for further processing. -->
+                <button type="submit">Upload photo</button>
+                <p id="avatar-message"></p>
+            </form>
+        </section>
+
+        <!-- Creates an account changes form with fields 'username',
+        'email', 'new-password' and for authentication 'current-password'
+        that allows user to save changes in the profile -->
+        <form id="profile-form">
+            <label for="username">Username</label>
+            <input id="username" name="username" required>
+            <p id="username-message"></p>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+
+            <label for="current-password">Current password</label>
+            <input id="current-password" name="currentPassword" type="password" autocomplete="current-password" required>
+
+            <label for="new-password">New password <span class="optional">(Optional)</span></label>
+            <input id="new-password" name="newPassword" type="password" autocomplete="new-password">
+
+            <!-- Submits form for further processing. -->
+            <button type="submit">Save changes</button>
+            <!-- Shows the user whether they have changed
+            credentials successfully or not . -->
+            <p id="profile-message"></p>
+        </form>
+    </main>
+
+    <!-- Exports script from "profile.js" and "header.js"-->
+    <script type="module" src="../js/profile.js" defer></script>
     <script src="../js/header.js" defer></script>
 </body>
 </html>
