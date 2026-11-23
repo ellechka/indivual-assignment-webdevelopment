@@ -1,4 +1,5 @@
 import { getFavoriteIds, toggleFavorite, sortFavorites } from './favorites.js';
+import { showRestaurantMap } from './map.js';
 
 const RESTAURANTS_API_URL = 'https://media2.edu.metropolia.fi/restaurant/api/v1/restaurants';
 const restaurantList = document.querySelector('#restaurant-list');
@@ -47,7 +48,17 @@ function displayRestaurants(restaurants) {
     // Displays each restaurant with a button to toggle its favorite status
     sortedRestaurants.forEach((restaurant) => {
         const item = document.createElement('li');
-        item.textContent = restaurant.name + ' ';
+        const heading = document.createElement('div');
+        heading.className = 'restaurant-heading';
+
+        // Creates a button to show the restaurant's location on the map.
+        const locationButton = document.createElement('button');
+        locationButton.type = 'button';
+        locationButton.textContent = 'Show location';
+        locationButton.addEventListener('click', () => showRestaurantMap(restaurant));
+
+        const name = document.createElement('span');
+        name.textContent = restaurant.name;
         
         // Checks whether this restaurant is in the favorites list
         const isFavorite = favoriteIds.includes(restaurant._id);
@@ -66,6 +77,11 @@ function displayRestaurants(restaurants) {
             toggleFavorite(restaurant._id);
             displayRestaurants(restaurants);
         });
+
+        heading.append(name, locationButton);
+
+        const restaurantActions = document.createElement('div');
+        restaurantActions.className = 'restaurant-actions';
         
         // Creates a link to the restaurant's daily menu.
         const dailyMenuLink = document.createElement('a');
@@ -85,7 +101,8 @@ function displayRestaurants(restaurants) {
         dailyMenuLink.href = `daily-menu.html?${params}`;
         weeklyMenuLink.href = `weekly-menu.html?${params}`;
 
-        item.append(favoriteButton, dailyMenuLink, weeklyMenuLink);
+        restaurantActions.append(favoriteButton, dailyMenuLink, weeklyMenuLink);
+        item.append(heading, restaurantActions);
         list.append(item);
     });
 
