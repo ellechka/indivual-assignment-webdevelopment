@@ -163,3 +163,24 @@ button:hover {
 .menu-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+/* Styles for weekly menu */
+.weekly-layout {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+}
+
+.weekly-days {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.weekly-days button {
+    border-radius: 6px;
+}
+
+.weekly-days button.active {
+    background-color: #178f89;
+}
