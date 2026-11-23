@@ -31,6 +31,18 @@ header a:hover {
     color: #b8e3df;
 }
 
+header button {
+    padding: 0;
+    background: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+header button:hover {
+    background: none;
+    color: #b8e3df;
+}
+
 main {
     max-width: 1000px;
     margin: 2rem auto;
