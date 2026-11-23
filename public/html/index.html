@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <title>Restaurants</title>
 </head>
 <body>
@@ -23,8 +24,10 @@
         <select id="sort">
             <option value="name">Alphabetical</option>
             <option value="distance">Nearest to me</option>
-            <option value="profile-address">Nearest to my address</option>
         </select>
+
+        <!-- Shows leaflet map -->
+        <div id="map" hidden></div>
 
         <!-- Shows all restaurants using API. -->
         <section id="restaurant-list">
@@ -32,6 +35,7 @@
         </section>
     </main>
     <!-- Exports script from "restaurant.js" -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="../js/restaurant.js"></script>
     <script src="../js/header.js" defer></script>
 </body>
