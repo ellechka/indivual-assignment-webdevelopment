@@ -33,13 +33,16 @@ loginForm.addEventListener('submit', async (event) => {
 
     try {
         // Calls the function loginUser() and sends login username and password
-        await loginUser(
+        const authData = await loginUser(
             formData.get('username'),
             formData.get('password')
         );
 
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('username', formData.get('username'));
+
         //if the user is logged in, displays the link
-        localStorage.getItem('loggedIn', 'true');
+        localStorage.setItem('loggedIn', 'true');
         document.querySelector("#profile-link").hidden = false;
 
         // Shows a success message
